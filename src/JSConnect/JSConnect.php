@@ -47,7 +47,7 @@ class JSConnect
              $Error = array('error' => 'invalid_request', 'message' => 'The timestamp parameter is missing or invalid.');
           elseif (!isset($Request['signature']))
              $Error = array('error' => 'invalid_request', 'message' => 'Missing  signature parameter.');
-          elseif (($Diff = abs($Request['timestamp'] - JsTimestamp())) > JS_TIMEOUT)
+          elseif (($Diff = abs($Request['timestamp'] - $this->JsTimestamp())) > JS_TIMEOUT)
              $Error = array('error' => 'invalid_request', 'message' => 'The timestamp is invalid.');
           else {
              // Make sure the timestamp hasn't timed out.
@@ -122,7 +122,7 @@ class JSConnect
        }
     }
 
-    function JsTimestamp() {
+    public function JsTimestamp() {
        return time();
     }
 
